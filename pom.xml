@@ -8,7 +8,7 @@
 	<!-- Library coordinates (use your GitHub username) -->
 	<groupId>com.github.Lewi217</groupId>
 	<artifactId>crypto-utils</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>crypto-utils</name>

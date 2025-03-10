@@ -1,6 +1,7 @@
 package DevLewi.crypto_utils;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 import javax.crypto.*;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -25,7 +26,15 @@ public class CryptoUtils {
         return keyGen.generateKey();
     }
 
+    public static byte[] generateKeyBytes() throws NoSuchAlgorithmException {
+        return generateKey().getEncoded();
+    }
+
     public static String encrypt(String plaintext, SecretKey key) throws Exception {
+        if (plaintext == null || plaintext.isEmpty()) {
+            throw new IllegalArgumentException("Plaintext cannot be null or empty");
+        }
+
         byte[] iv = new byte[IV_LENGTH];
         SecureRandom secureRandom = new SecureRandom();
         secureRandom.nextBytes(iv);
@@ -42,9 +51,18 @@ public class CryptoUtils {
         return Base64.getEncoder().encodeToString(outputStream.toByteArray());
     }
 
-    public static String decrypt(String encryptedData, SecretKey key) throws Exception {
-        byte[] decoded = Base64.getDecoder().decode(encryptedData);
+    public static String encrypt(String plaintext, byte[] keyBytes) throws Exception {
+        SecretKey key = new SecretKeySpec(keyBytes, "AES");
+        return encrypt(plaintext, key);
+    }
 
+
+    public static String decrypt(String encryptedData, SecretKey key) throws Exception {
+        if (encryptedData == null || encryptedData.isEmpty()) {
+            throw new IllegalArgumentException("Encrypted data cannot be null or empty");
+        }
+
+        byte[] decoded = Base64.getDecoder().decode(encryptedData);
         byte[] iv = Arrays.copyOfRange(decoded, 0, IV_LENGTH);
         byte[] cipherText = Arrays.copyOfRange(decoded, IV_LENGTH, decoded.length);
 
@@ -53,6 +71,11 @@ public class CryptoUtils {
         cipher.init(Cipher.DECRYPT_MODE, key, parameterSpec);
 
         return new String(cipher.doFinal(cipherText));
+    }
+
+    public static String decrypt(String encryptedData, byte[] keyBytes) throws Exception {
+        SecretKey key = new SecretKeySpec(keyBytes, "AES");
+        return decrypt(encryptedData, key);
     }
 
     public static String keyToString(SecretKey key) {
