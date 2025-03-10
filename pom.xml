@@ -19,6 +19,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<bouncycastle.version>1.77</bouncycastle.version>
 	</properties>
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/Lewi217/crypto-utils</url>
+		</repository>
+	</distributionManagement>
+
 
 	<dependencies>
 		<dependency>
