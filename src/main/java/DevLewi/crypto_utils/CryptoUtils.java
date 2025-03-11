@@ -12,9 +12,9 @@ import java.util.Base64;
 
 public class CryptoUtils {
     private static final String ALGORITHM = "AES/GCM/NoPadding";
-    private static final int TAG_LENGTH = 128;
-    private static final int IV_LENGTH = 12;
-    private static final int KEY_LENGTH = 256;
+    private static final int TAG_LENGTH = 128; //these are bits
+    private static final int IV_LENGTH = 12; //these are bits
+    private static final int KEY_LENGTH = 256;// these are bits
 
     static {
         Security.addProvider(new BouncyCastleProvider());
