@@ -8,7 +8,6 @@ A lightweight Java cryptography library that simplifies encryption and decryptio
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
   - [Maven Dependency](#maven-dependency)
-  - [Basic Usage](#basic-usage)
   - [Running Tests](#running-tests)
 - [Contributing](#contributing)
 
@@ -60,7 +59,7 @@ Add the following dependency to your `pom.xml` to include crypto-utils in your p
 </dependency>
 
 ```
-## Running Test
+## Running Tests
 
 To verify functionality, run the included JUnit tests with:
 
